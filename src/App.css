@@ -1,38 +1,284 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* ベーススタイル */
+.quiz-app {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  min-height: 100vh;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+.quiz-battle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.enemy-container {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  margin-bottom: 20px;
+}
+
+.enemy {
+  max-width: 100%;
+  height: auto;
+}
+
+.enemy-hp-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background-color: red;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.enemy-hp {
+  height: 100%;
+  background-color: green;
+  transition: width 0.3s ease;
+}
+
+.quiz-question,
+.quiz-end {
+  max-width: 600px;
+  width: 100%;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-align: center;
+  animation: fadeIn 1s ease-out;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.option-button {
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.option-button.selected {
+  background-color: #2ecc71;
+}
+
+.option-button:hover {
+  background-color: #2980b9;
+}
+
+.next-button,
+.restart-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.next-button:hover,
+.restart-button:hover {
+  background-color: #c0392b;
+}
+
+p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+/* ダメージアップボタンのスタイル */
+.damage-boost-button {
+  margin-bottom: 30px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #f39c12;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.damage-boost-button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+.damage-boost-button:hover:not(:disabled) {
+  background-color: #e67e22;
+}
+
+/* 敵の体力表示部分の中央揃えと背景追加 */
+.enemy-hp-display {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ff3e3e;
+  background-color: rgba(255, 255, 255, 0.7);
+  /* 薄い白色の背景を追加 */
+  padding: 0;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+  /* 中央揃えのために幅を100%に */
+}
+
+/* お金の表示部分のスタイルと背景追加 */
+.money-display {
+  font-size: 2rem;
+  color: #555;
+  font-weight: bold;
+  margin-top: 20px;
+  background-color: rgba(255, 255, 255, 1);
+  /* 薄い白色の背景を追加 */
+  padding: 10px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+/* その他のテキスト部分の共通スタイル */
+p {
+  font-family: 'Arial', sans-serif;
+  font-size: 1.1rem;
+}
+
+/* 次の問題ボタン */
+.next-button {
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.next-button:hover {
+  background-color: #2980b9;
+}
+
+.quiz-options button.selected {
+  background-color: #f39c12;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* Shopのスタイル */
+.shop {
+  background-color: #f1c40f;
+  border: 2px solid #f39c12;
+  padding: 20px;
+  text-align: center;
+  margin-top: 20px;
+  border-radius: 10px;
 }
 
-@keyframes App-logo-spin {
+.upgrade-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.upgrade-button:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+.upgrade-button:hover:not(:disabled) {
+  background-color: #2ecc71;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+
+  .quiz-question,
+  .quiz-end {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .option-button,
+  .next-button,
+  .restart-button {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+}
+
+/* アニメーション */
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(10px);
   }
+
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* 震えアニメーション */
+@keyframes shake {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  20% {
+    transform: translate(-10px, 0);
+  }
+
+  40% {
+    transform: translate(10px, 0);
+  }
+
+  60% {
+    transform: translate(-10px, 0);
+  }
+
+  80% {
+    transform: translate(10px, 0);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.shake {
+  animation: shake 0.5s ease;
 }
