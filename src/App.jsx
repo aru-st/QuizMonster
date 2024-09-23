@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './App.css'; // CSSファイルを追加
 import quizData from './quizData'; // quizData.jsから問題データをインポート
+import { Analytics } from "@vercel/analytics/react" // VercelのWeb Analytics閲覧用
 
 function App() {
   const [questions, setQuestions] = useState([]); // ランダムで選ばれた3題の問題を格納
@@ -41,7 +42,7 @@ function App() {
   };
 
   const handleNextQuestion = () => {
-    let damage = isDamageBoosted ? baseDamage * 2 : baseDamage; // ダメージが増加している場合は2倍
+    let damage = isDamageBoosted ? baseDamage * 10 : baseDamage; // ダメージが増加している場合は10倍
     if (selectedAnswer === currentQuestion.answer) {
       if (damage >= enemyHp) {
         // ダメージが敵の残りHP以上の場合、敵を倒したとみなす
@@ -142,7 +143,7 @@ function App() {
             onClick={handleDamageBoost}
             disabled={isDamageBoostUsed}  // 一度使ったら無効化
           >
-            {isDamageBoostUsed ? "ブースト使用済み" : "ブーストを使う"}
+            {isDamageBoostUsed ? "ブースト使用済み" : "ブーストを使う 攻撃力10倍"}
           </button>
 
           <div className="quiz-question fade-in">
